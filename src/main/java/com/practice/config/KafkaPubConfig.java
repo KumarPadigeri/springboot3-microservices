@@ -13,11 +13,15 @@ import org.springframework.context.annotation.Configuration;
 public class KafkaPubConfig {
 
     @Bean
-    public NewTopic createTopic(){
-        return new NewTopic("springboot-topic-new",3,(short) 1);
+    public NewTopic createTopic() {
+        return new NewTopic("springboot-topic-new", 3, (short) 1);
     }
 
 
+    @Bean
+    public NewTopic createTopicForSpecificPartition() {
+        return new NewTopic("specific-topic-partition", 3, (short) 1);
+    }
 
 
 

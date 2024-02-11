@@ -167,7 +167,9 @@
       "post": {
         "summary": "Add a new pet",
         "operationId": "sendObjectToKafka",
-        "tags": ["kafka"],
+        "tags": [
+          "kafka"
+        ],
         "requestBody": {
           "description": "Optional description in *Markdown*",
           "required": true,
@@ -184,6 +186,48 @@
             "description": "A paged array of Alphabets ",
             "content": {
               "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/kafka/sendMsgToSpecificPartition/{message}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "message",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Message"
+          }
+        ],
+        "summary": "Sending msg to kafka",
+        "operationId": "sendMsgToSpecificPartition",
+        "tags": [
+          "kafka"
+        ],
+        "responses": {
+          "200": {
+            "description": "Sending msg to kafka",
+            "content": {
+              "application/json": {
                 "schema": {
                   "type": "string"
                 }

@@ -2,7 +2,6 @@ package com.practice.rest;
 
 import com.practice.service.KafkaEventPub;
 import com.test.api.KafkaApi;
-import com.test.model.StudentAO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -36,5 +35,13 @@ public class KafkaController implements KafkaApi {
         }
     }
 
-
+    @Override
+    public ResponseEntity<String> sendMsgToSpecificPartition(String message) {
+        try {
+            kafkaEventPub.sendMsgToSpecificPartition(message);
+            return new ResponseEntity<>("Msg send successfully", HttpStatus.OK);
+        } catch (Exception ex) {
+            return new ResponseEntity<>("Failed to sent Msg", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
